@@ -30,6 +30,19 @@ pipeline {
                 sh 'docker build -t kitt0/banking:1.0 .'
             }
         }
+        stage('docker login') {
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'DockerLogin', passwordVariable: 'd_password', usernameVariable: 'd_user')])
+                {
+                sh   'docker login -u $(d_user) -p $(d_password)'
+                    }
+            }
+        }
+        stage('dockerpush') {
+            steps {
+                sh 'docker push kitt0/banking:1.0'
+            }
+        }
         
     }
 }
