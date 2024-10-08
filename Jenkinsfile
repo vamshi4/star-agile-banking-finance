@@ -27,7 +27,7 @@ pipeline {
         }
         stage('created docker image') {
             steps {
-                sh 'docker build -t kitt0/banking:1.0
+                sh 'docker build -t kitt0/banking:1.0 .'
             }
         }
         
