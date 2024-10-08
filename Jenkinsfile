@@ -32,10 +32,10 @@ pipeline {
         }
         stage('docker login') {
             steps{
-                withCredentials([usernamePassword(credentialsId: 'DockerLogin', passwordVariable: 'd_password', usernameVariable: 'd_user')])
-                {
-                sh   'docker login -u $(d_user) -p $(d_password)'
-                    }
+               withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'd_user', passwordVariable: 'd_password')]) {
+                   sh  docker login -u $d_user -p $d_password
+                        
+                }
             }
         }
         stage('dockerpush') {
