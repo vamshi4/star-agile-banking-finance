@@ -20,7 +20,7 @@ pipeline {
             }
             
         }
-        stage(Test_Reports) {
+        stage('Test_Reports') {
             steps {
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/bank_1', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
