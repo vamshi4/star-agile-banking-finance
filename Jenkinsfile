@@ -31,13 +31,15 @@ pipeline {
             }
         }
         stage('docker login') {
-            steps{
-               withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'd_user', passwordVariable: 'd_password')]) {
-                   sh  docker login -u $d_user -p $d_password
-                        
-                }
-            }
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'd_user', passwordVariable: 'd_password')]) {
+            sh """
+                docker login -u "$d_user" -p "$d_password"
+            """
         }
+    }
+}
+
         stage('dockerpush') {
             steps {
                 sh 'docker push kitt0/banking:1.0'
